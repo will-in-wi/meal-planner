@@ -10,5 +10,23 @@
   <%= @food.notes %>
 </p>
 
+<% if @food.ingredients.any? %>
+  <strong>Ingredients</strong>
+  <ul>
+    <% @food.ingredients.each do |ingredient| %>
+      <li><%= link_to ingredient.food.name, ingredient.food %> — <%= ingredient.amount %> <%= ingredient.unit_of_measure %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<% if @food.dishes.any? %>
+  <strong>Dishes containing this food</strong>
+  <ul>
+    <% @food.ingredient_dishes.each do |ing_dish| %>
+      <li><%= link_to ing_dish.dish.name, ing_dish.dish %> — <%= ing_dish.amount %> <%= ing_dish.unit_of_measure %></li>
+    <% end %>
+  </ul>
+<% end %>
+
 <%= link_to 'Edit', edit_food_path(@food) %> |
 <%= link_to 'Back', foods_path %>
